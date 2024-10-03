@@ -27,4 +27,5 @@ export type Step = {
   title: string;
   description?: string;
   target?: string;
+  id: string | number;
 };

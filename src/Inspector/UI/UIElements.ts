@@ -23,7 +23,7 @@ const sidebarHeader = createElement(
   'div',
   {
     className:
-      'capture-sidebar-header bg-[var(--inpector-sidebar-header-bg)] rounded-t p-3 flex justify-between items-center border-b border-[var(--inspector-border-color,gray)]'
+      'capture-sidebar-header bg-[var(--inpector-card-bg)] rounded-t p-3 flex justify-between items-center border-b border-[var(--inspector-border-color,gray)]'
   },
   sidebar
 );
@@ -40,7 +40,7 @@ export const createHandle = (container: HTMLElement = sidebarHeader) => {
   return createElement(
     'button',
     {
-      className: 'btn btn-sm btn-square cursor-grab border-[var(--inspector-border-color,gray)] hover:border-[var(--inspector-border-color,gray)]',
+      className: 'btn btn-sm btn-square !cursor-grab border-[var(--inspector-border-color,gray)] hover:border-[var(--inspector-border-color,gray)]',
       innerHTML: dragHandle,
       title: 'Click and drag',
       draggable: true
@@ -153,8 +153,8 @@ export const createSidebaItem = (head: string, body?: string, parentContainer: f
       className: 'capture-sidebar-item',
       innerHTML: `
       <a class="block">
-      <h6 class="text-lg">${head}</h6>
-      <p class="text-sm">${body}</p>
+      <h6 class="text-lg line-clamp-1">${head}</h6>
+      <p class="text-sm line-clamp-2">${body}</p>
       </a>`
     },
     parentContainer
@@ -183,7 +183,7 @@ const dialogCard = createElement(
 export const dialogElementContainer = createElement(
   'div',
   {
-    className: 'capture-dialog-container space-y-3'
+    className: 'capture-dialog-container space-y-4'
   },
   dialogCard
 );

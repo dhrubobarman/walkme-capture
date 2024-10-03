@@ -17,6 +17,7 @@ import {
   inspectorContainer,
   exportButton
 } from '@/Inspector/UI/UIElements';
+import { createElement } from '@/utils/createElement';
 
 export class UI {
   inspector: Inspector;
@@ -55,6 +56,9 @@ export class UI {
     this.exportButton.disabled = true;
     this.resumeButton.disabled = true;
     this.startButton.onclick = () => {
+      this.exportButton.disabled = true;
+      this.stepData = {};
+      this.sidebarUl.innerHTML = '';
       this.openNameInputDialog();
     };
     this.exportButton.onclick = () => {
@@ -132,7 +136,8 @@ export class UI {
     let tempStep: Step = {
       title: '',
       description: '',
-      target: data.selector || ''
+      target: data.selector || '',
+      id: Date.now()
     };
     const { input: titleInput, inputLabel: titleInputLabel } = createInput({
       placeholder: 'Enter Step Name',
@@ -162,7 +167,7 @@ export class UI {
     });
 
     const nextButton = createButton({ innerText: 'Next', className: 'btn-success btn-outline', type: 'submit' });
-    const finishButton = createButton({ innerText: 'Finish', className: 'btn-success mr-auto' });
+    const finishButton = createButton({ innerText: 'Finish', className: 'btn-success', type: 'button' });
 
     const reCaptureButton = createButton({
       innerText: 'Re-Capture',
@@ -182,6 +187,7 @@ export class UI {
 
     reCaptureButton.onclick = () => {
       tempStep = {
+        id: Date.now(),
         title: '',
         description: '',
         target: ''
@@ -207,25 +213,49 @@ export class UI {
     };
 
     finishButton.onclick = () => {
-      if (!tempStep.title || tempStep.title?.length === 0) return;
-      this.stepData.steps = this.stepData.steps || [];
-      this.stepData.steps.push(tempStep);
+      if (tempStep.title && tempStep.title?.length > 0) {
+        this.stepData.steps = this.stepData.steps || [];
+        this.stepData.steps.push(tempStep);
+        this.addListItem(tempStep);
+      }
       this.stopCapturing();
       this.resumeButton.disabled = true;
-      this.addListItem(tempStep);
     };
     this.modalContentContainer.append(targetInputLabel, titleInputLabel, descriptionInputLabel);
-    this.modalFooterContainer.append(pauseButton);
+
     if (this.stepData.steps && this.stepData.steps?.length > 0) {
       this.modalFooterContainer.append(finishButton);
       this.exportButton.disabled = false;
     }
+    this.modalFooterContainer.append(pauseButton);
     this.modalFooterContainer.append(reCaptureButton, nextButton);
     this.modal.showModal();
   }
 
   addListItem(step: Step) {
-    createSidebaItem(step.title, step.description || '', this.sidebarUl);
+    const sidebarItem = createSidebaItem(step.title, step.description || '', this.sidebarUl);
+    createElement(
+      'button',
+      {
+        className: 'btn btn-sm btn-square border-[var(--inspector-border-color,gray)] hover:border-[var(--inspector-border-color,gray)]',
+        innerHTML: 'x',
+        title: 'Click and drag',
+        draggable: true,
+        onclick: () =>
+          this.removeItemFromStepData(
+            this.stepData.steps?.findIndex((d) => d.id === step.id),
+            sidebarItem
+          )
+      },
+      sidebarItem
+    );
+  }
+
+  removeItemFromStepData(index: number | undefined, sidebarItem: HTMLLIElement) {
+    if (index === undefined || index === -1) return;
+    this.sidebarUl.removeChild(sidebarItem);
+    this.stepData.steps?.splice(index, 1);
+    if (this.stepData.steps?.length === 0) this.exportButton.disabled = true;
   }
 
   pause() {
@@ -250,10 +280,8 @@ export class UI {
   }
   stopCapturing() {
     this.inspector.stopCapturing();
-    console.log(this.stepData);
     this.closeModal();
     this.clearModal();
-    this.stepData = {};
     this.startButton.disabled = false;
   }
 
@@ -274,6 +302,7 @@ export class UI {
   }
 
   export() {
+    console.log(this.stepData);
     this.clearModal();
     this.closeModal();
     const blob = new Blob([JSON.stringify(this.stepData, null, 2)], {
@@ -284,9 +313,8 @@ export class UI {
     a.href = url;
     a.download = `${this.stepData.title}.json`;
     a.click();
+    console.log(this.stepData);
     URL.revokeObjectURL(url);
-    this.stepData = {};
-    this.exportButton.disabled = true;
   }
 
   initDND() {

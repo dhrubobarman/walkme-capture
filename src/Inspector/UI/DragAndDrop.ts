@@ -26,11 +26,11 @@ export class DragAndDrop {
   private addElevationStyle() {
     this.container.style.transition = 'box-shadow 0.3s ease-in-out';
     this.container.classList.add('dragging', this.shadowClass);
-    this.handle.classList.add('dragging', 'cursor-grabbing');
+    this.handle.classList.add('dragging', '!cursor-grabbing');
   }
   private removeElevationStyle() {
     this.container.classList.remove('dragging', this.shadowClass);
-    this.handle.classList.remove('dragging', 'cursor-grabbing');
+    this.handle.classList.remove('dragging', '!cursor-grabbing');
     this.container.style.transition = 'box-shadow 0.3s ease-in-out';
   }
 
