@@ -90,6 +90,15 @@ export class Inspector {
       e.stopPropagation();
     }
   }
+  pause() {
+    this.stopCapturing();
+  }
+  resume() {
+    this.addEventListeners();
+    this.isInspecting = true;
+    this.elements.addElementToDom();
+    requestAnimationFrame((delta) => this.animate(delta));
+  }
 
   stopCapturing() {
     this.elements.removeElementFromDom();

@@ -26,4 +26,5 @@ export type StepData = {
 export type Step = {
   title: string;
   description?: string;
+  target?: string;
 };
