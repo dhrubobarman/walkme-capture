@@ -1,10 +1,14 @@
 import { createElement } from '@/utils/createElement';
 import { dragHandle } from '@/assets/svgs';
 
-export const inspectorContainer = createElement('div', {
-  className: 'capture-container',
-  id: 'capture-container'
-});
+export const inspectorContainer = createElement(
+  'div',
+  {
+    className: 'capture-container',
+    id: 'capture-container'
+  },
+  'body'
+);
 
 export const sidebar = createElement(
   'div',
