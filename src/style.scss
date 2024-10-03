@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --inpector-sidebar-bg: var(--fallback-b3, oklch(var(--b3) / var(--tw-bg-opacity, 1)));
+  --inpector-sidebar-item-bg: #1d232a;
+  --inpector-text-color: #ffffff;
+}

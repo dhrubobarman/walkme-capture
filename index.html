@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+ 
+  <body>
+    <div id="app">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px; padding-block: 50px;" className="grid w-[100%] grid-cols-[1fr] gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6" id="container"></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+    <script>
+      const items = Array.from(new Array(30), (_, index) => `item-${index}`);
+  
+      function getId(id, extra) {
+        if (id) {
+          return `id=${extra}-${id}`;
+        }
+        return '';
+      }
+  
+      function renderExsceleton() {
+        let html = '';
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          const id = i % 2 === 0 ? i : null;
+          const newHTML = `
+            <div ${getId(id, 'card')} class="card bg-base-300 shadow-xl">
+                <div ${getId(id, 'card-body')} class="card-body">
+                  <h2 ${getId(id, 'card-title')} class="card-title">
+                    ${item}
+                  </h2>
+                  <p ${getId(id, 'card-p')}>If a dog chews shoes whose shoes does he choose?</p>
+                  <div ${getId(id, 'card-actions')} class="card-actions justify-end">
+                    <button id={item} class="btn btn-primary btn-sm">
+                      Buy Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+          `;
+          html+=newHTML
+        }
+        const container = document.querySelector('#container').innerHTML = html;
+      }
+      renderExsceleton();
+    </script>
+  </body>
+</html>
