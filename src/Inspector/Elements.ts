@@ -70,26 +70,28 @@ export class Elements {
 
   highlightElement() {
     let backgroundColor = this.highlightColor;
+    let borderColor = 'blue';
     if (this.targetElementData) {
       this.targetElementData.success = true;
-      this.hoverElement.style.border = '2px dashed blue';
+
       try {
         const virtualElement = this.getElementDataFromSelector(this.targetElementData.selector);
         if (!virtualElement || virtualElement?.element !== this.targetElement) {
           backgroundColor = this.falseHighlightColor;
-          this.hoverElement.style.border = '2px dashed red';
+          borderColor = 'red';
           this.targetElementData.success = false;
         }
       } catch (e) {
         console.warn(e);
         this.targetElementData.success = false;
-        this.hoverElement.style.border = '2px dashed red';
+        borderColor = 'red';
         backgroundColor = this.falseHighlightColor;
       }
 
       const style = getComputedStyle(this.targetElement);
       const borderRadius = style.getPropertyValue('border-radius');
       const { htmlBox } = this.targetElementData;
+      this.hoverElement.style.border = `2px dashed ${borderColor}`;
       this.hoverElement.style.borderRadius = borderRadius;
       this.hoverElement.style.left = htmlBox.left + 'px';
       this.hoverElement.style.top = htmlBox.top + 'px';
