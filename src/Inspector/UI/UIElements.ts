@@ -39,7 +39,7 @@ export const saveSidebarUlContainer = createElement('div', { className: 'saved-s
 export const savedSidebarUl = createElement(
   'ul',
   {
-    className: 'capture-sidebar-content menu bg-base-200 rounded max-h-[calc(100vh-456px)] overflow-y-auto block m-3 min-h-[50px]'
+    className: 'capture-sidebar-content overscroll-contain menu bg-base-200 rounded max-h-[calc(100vh-456px)] overflow-y-auto block m-3 min-h-[50px]'
   },
   saveSidebarUlContainer
 );
@@ -126,7 +126,7 @@ export const listTitle = createElement(
 export const sidebarUl = createElement(
   'ul',
   {
-    className: 'capture-sidebar-content menu bg-base-200 rounded max-h-[calc(100vh-456px)] overflow-y-auto block min-h-[50px]'
+    className: 'capture-sidebar-content overscroll-contain menu bg-base-200 rounded max-h-[calc(100vh-456px)] overflow-y-auto block min-h-[50px]'
   },
   cardContent
 );
