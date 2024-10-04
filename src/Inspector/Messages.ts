@@ -37,11 +37,12 @@ export class Messages {
       padding: 50px;
       border-radius: 10px;
       text-align: center;
+      color: white;
     `;
     this.counterElement.style.cssText = `
       font-size: 24px;
       font-weight: bold;
-      color: white;
+      
     `;
     this.messageElement.style.cssText = `
       max-width: 300px;

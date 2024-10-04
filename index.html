@@ -7,8 +7,8 @@
     <title>Vite + TS</title>
   </head>
  
-  <body>
-    <div id="app">
+  <body class="dark:bg-slate-950">
+    <div id="app" >
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px; padding-block: 50px;" className="grid w-[100%] grid-cols-[1fr] gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6" id="container"></div>
     </div>
     <script type="module" src="/src/main.ts"></script>
@@ -28,7 +28,7 @@
           const item = items[i];
           const id = i % 2 === 0 ? i : null;
           const newHTML = `
-            <div ${getId(id, 'card')} class="card bg-base-300 shadow-xl">
+            <div ${getId(id, 'card')} class="card dark:bg-slate-800 bg-white rounded-md dark:text-white shadow-xl p-4">
                 <div ${getId(id, 'card-body')} class="card-body">
                   <h2 ${getId(id, 'card-title')} class="card-title">
                     ${item}
@@ -50,3 +50,5 @@
     </script>
   </body>
 </html>
+
+

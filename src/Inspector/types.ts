@@ -17,6 +17,7 @@ export type InspectorProps = {
 };
 
 export type StepData = {
+  _id: string;
   title: string;
   url: string;
   description?: string;
@@ -27,5 +28,6 @@ export type Step = {
   title: string;
   description?: string;
   target?: string;
-  id: string | number;
+  learned: boolean;
+  _id: string;
 };

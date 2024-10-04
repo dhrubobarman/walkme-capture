@@ -9,6 +9,7 @@
   --inspector-border-color: rgb(236, 233, 233);
   --inspector-gap: 8px;
   --disabled-button-bg: rgb(213, 213, 213);
+  --error-t: white;
   --error: #ff5861;
   --success: #00a96e;
   --success-t: white;
@@ -17,7 +18,50 @@
   --inspector-list-bg: #f2f2f2;
   --inspector-active-list-bg: #dcdddf;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --inpector-card-bg: #1f2937;
+    --inpector-sidebar-item-bg: #1d232a;
+    --inpector-text-color: #ffffff;
+    --inspector-border-color: rgb(82, 82, 82);
+    --inspector-gap: 8px;
+    --disabled-button-bg: rgb(213, 213, 213);
+    --error: #ff5861;
+    --error-t: white;
+    --success: #00a96e;
+    --success-t: white;
+    --neutral: #18181b;
+    --neutral-text: white;
+    --inspector-list-bg: #334155;
+    --inspector-active-list-bg: #1f2937;
+  }
+}
+
 .capture-container {
+  color-scheme: light dark;
+  dialog:-internal-dialog-in-top-layer::backdrop {
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  @media (prefers-color-scheme: dark) {
+    * {
+      color: white;
+    }
+    input,
+    textarea {
+      &:focus,
+      &:focus-visible,
+      &:focus-within {
+        outline-color: var(--inspector-border-color) !important;
+      }
+    }
+    dialog:-internal-dialog-in-top-layer::backdrop {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
   .card {
     background-color: var(--inpector-card-bg);
     & * {
@@ -108,7 +152,7 @@
   }
   .btn-error:not(.btn-outline) {
     background-color: var(--error) !important;
-    color: var(--error-text);
+    color: var(--error-t);
   }
   .btn-error.btn-outline {
     border-color: var(--error);
@@ -290,5 +334,14 @@
 
   label {
     display: block;
+  }
+
+  *[data-collapsed='true'] {
+    border-radius: 0.375rem;
+  }
+  .capture-sidebar-item:last-child {
+    .step-arrow {
+      display: none;
+    }
   }
 }

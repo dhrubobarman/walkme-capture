@@ -5,10 +5,14 @@ export class DragAndDrop {
   private offsetX: number = 0;
   private offsetY: number = 0;
   private shadowClass: string = '!shadow-2xl';
+  name: string;
+  onDragStart: (container: HTMLElement, name: string) => void;
 
-  constructor(container: HTMLElement, handle: HTMLElement) {
+  constructor(container: HTMLElement, handle: HTMLElement, name: string, onDragStart: (container: HTMLElement, name: string) => void = () => {}) {
     this.container = container;
     this.handle = handle;
+    this.name = name;
+    this.onDragStart = onDragStart;
 
     this.handle.addEventListener('mousedown', this.onMouseDown);
     document.addEventListener('mousemove', this.onMouseMove);
@@ -17,6 +21,7 @@ export class DragAndDrop {
 
   private onMouseDown = (event: MouseEvent) => {
     event.preventDefault();
+    this.onDragStart(this.container, this.name);
     this.isDragging = true;
     this.offsetX = event.clientX - this.container.offsetLeft;
     this.offsetY = event.clientY - this.container.offsetTop;

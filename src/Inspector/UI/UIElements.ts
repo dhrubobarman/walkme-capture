@@ -1,5 +1,6 @@
 import { createElement } from '@/utils/createElement';
-import { dragHandle } from '@/assets/svgs';
+import { arrowDown, dragHandle } from '@/assets/svgs';
+import { StepData } from '@/Inspector/types';
 
 export const inspectorContainer = createElement(
   'div',
@@ -9,6 +10,50 @@ export const inspectorContainer = createElement(
   },
   'body'
 );
+
+export const savedSidebar = createElement(
+  'div',
+  {
+    className:
+      'saved-sidebar max-h-[calc(100vh-200px)] shadow-lg card bg-base-300 fixed min-w-[300px] max-w-[300px] min-h-[50px] z-[9999] left-[300px] top-[0px] rounded-md border border-[var(--inspector-border-color,gray)]'
+  },
+  inspectorContainer
+);
+export const savedSidebarHeader = createElement(
+  'div',
+  {
+    className:
+      'capture-sidebar-header bg-[var(--inpector-card-bg)] rounded-t p-3 flex justify-between items-center border-b border-[var(--inspector-border-color,gray)]'
+  },
+  savedSidebar
+);
+createElement(
+  'span',
+  {
+    className: 'capture-sidebar-header-title text-[var(--inpector-sidebar-header-title-color)] text-[20px] font-semibold',
+    innerText: 'Saved Steps'
+  },
+  savedSidebarHeader
+);
+export const saveSidebarUlContainer = createElement('div', { className: 'saved-sidebar' }, savedSidebar);
+export const savedSidebarUl = createElement(
+  'ul',
+  {
+    className: 'capture-sidebar-content menu bg-base-200 rounded max-h-[calc(100vh-456px)] overflow-y-auto block m-3 min-h-[50px]'
+  },
+  saveSidebarUlContainer
+);
+
+export const inserItemInSavedSidebar = (stepData: StepData) => {
+  return createElement(
+    'li',
+    {
+      className: 'saved-item',
+      innerHTML: `<a><h6 class="text-lg line-clamp-1 ">${stepData.title}</h6></a>`
+    },
+    savedSidebarUl
+  );
+};
 
 export const sidebar = createElement(
   'div',
@@ -28,7 +73,7 @@ const sidebarHeader = createElement(
   sidebar
 );
 
-const cardContent = createElement(
+export const cardContent = createElement(
   'div',
   {
     className: 'card-content p-3'
@@ -44,6 +89,17 @@ export const createHandle = (container: HTMLElement = sidebarHeader) => {
       innerHTML: dragHandle,
       title: 'Click and drag',
       draggable: true
+    },
+    container
+  );
+};
+export const createCollapseButton = (container: HTMLElement = sidebarHeader) => {
+  return createElement(
+    'button',
+    {
+      className:
+        'btn btn-sm btn-outline !ml-auto mr-2  btn-square border-[var(--inspector-border-color,gray)] hover:border-[var(--inspector-border-color,gray)]',
+      title: 'Collapse'
     },
     container
   );
@@ -66,13 +122,31 @@ export const listTitle = createElement(
   },
   cardContent
 );
+
 export const sidebarUl = createElement(
   'ul',
   {
-    className: 'capture-sidebar-content menu bg-base-200 rounded max-h-[calc(100vh-456px)] overflow-y-auto block'
+    className: 'capture-sidebar-content menu bg-base-200 rounded max-h-[calc(100vh-456px)] overflow-y-auto block min-h-[50px]'
   },
   cardContent
 );
+
+export const createSidebaItem = (head: string, body?: string, parentContainer: false | HTMLElement = false) => {
+  const sidebarContent = createElement(
+    'li',
+    {
+      className: 'capture-sidebar-item relative !my-[9px]',
+      innerHTML: `
+      <a class="block">
+      <h6 class="text-lg line-clamp-1">${head}</h6>
+      <p class="text-xs line-clamp-2 text-gray-500">${body}</p>
+      <p class="text-center absolute -bottom-[18px] left-0 right-0 flex items-center justify-center z-[2] text-gray-300  step-arrow">${arrowDown}</p>
+      </a>`
+    },
+    parentContainer
+  );
+  return sidebarContent;
+};
 
 export const cardActions = createElement(
   'div',
@@ -143,24 +217,8 @@ export const createInput = ({
   );
   return { inputLabel, input };
 };
-export const startButton = createButton({ innerText: 'Start', container: cardActions });
-export const exportButton = createButton({ innerText: 'Export', container: cardActions, className: 'mr-auto ' });
-
-export const createSidebaItem = (head: string, body?: string, parentContainer: false | HTMLElement = false) => {
-  const sidebarContent = createElement(
-    'li',
-    {
-      className: 'capture-sidebar-item',
-      innerHTML: `
-      <a class="block">
-      <h6 class="text-lg line-clamp-1">${head}</h6>
-      <p class="text-sm line-clamp-2">${body}</p>
-      </a>`
-    },
-    parentContainer
-  );
-  return sidebarContent;
-};
+export const startButton = createButton({ innerText: 'Start New', container: cardActions });
+export const saveButton = createButton({ innerText: 'Save', container: cardActions, className: 'mr-auto ' });
 
 export const modal = createElement(
   'dialog',
