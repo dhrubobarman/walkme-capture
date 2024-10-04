@@ -21,8 +21,8 @@ export class Inspector {
     update,
     startMessage = '',
     countdownTimeInSeconds = 3,
-    highlightColor = 'rgba(0,0,255,0.4)',
-    falseHighlightColor = 'rgba(255, 0, 0, 0.4)'
+    highlightColor = 'rgba(0,0,255,0.3)',
+    falseHighlightColor = 'rgba(255, 0, 0, 0.3)'
   }: InspectorProps) {
     this.isListenerAttached = false;
     this.isInspecting = false;

@@ -23,7 +23,7 @@ export class Elements {
       className: 'inspector-hover-element border-2 border-red-500 fixed z-[1305]'
     });
     this.hoverElement.style.position = 'fixed';
-    this.hoverElement.style.border = '1px solid red';
+
     this.hoverElement.style.pointerEvents = 'none';
     this.hoverElement.style.zIndex = '1305';
   }
@@ -72,15 +72,18 @@ export class Elements {
     let backgroundColor = this.highlightColor;
     if (this.targetElementData) {
       this.targetElementData.success = true;
+      this.hoverElement.style.border = '2px dashed blue';
       try {
         const virtualElement = this.getElementDataFromSelector(this.targetElementData.selector);
         if (!virtualElement || virtualElement?.element !== this.targetElement) {
           backgroundColor = this.falseHighlightColor;
+          this.hoverElement.style.border = '2px dashed red';
           this.targetElementData.success = false;
         }
       } catch (e) {
         console.warn(e);
         this.targetElementData.success = false;
+        this.hoverElement.style.border = '2px dashed red';
         backgroundColor = this.falseHighlightColor;
       }
 
