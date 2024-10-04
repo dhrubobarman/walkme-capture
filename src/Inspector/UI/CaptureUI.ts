@@ -258,7 +258,7 @@ export class CaptureUI {
 
     if (savedData) {
       const submitButton: HTMLButtonElement = createButton({
-        innerText: 'Submit',
+        innerText: 'Update',
         className: 'btn-success',
         type: 'button'
       });
