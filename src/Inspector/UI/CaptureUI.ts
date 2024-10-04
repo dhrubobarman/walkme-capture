@@ -91,6 +91,7 @@ export class CaptureUI {
     this.saveButton.disabled = true;
     this.resumeButton.disabled = true;
     this.startButton.onclick = () => {
+      this.listTitle.value = '';
       this.resumeButton.disabled = true;
       this.saveButton.disabled = true;
       this.stepData = {};
@@ -103,6 +104,11 @@ export class CaptureUI {
     this.cardActions.appendChild(this.resumeButton);
     this.resumeButton.onclick = () => {
       this.resume();
+    };
+    this.listTitle.oninput = (e) => {
+      const value = this.getInputValue(e);
+      this.stepData.title = value;
+      this.saveButton.disabled = value.length === 0;
     };
   }
 
@@ -153,7 +159,7 @@ export class CaptureUI {
 
     titleInput.oninput = (e) => {
       this.stepData.title = this.getInputValue(e);
-      this.listTitle.innerText = this.stepData.title;
+      this.listTitle.value = this.stepData.title;
     };
     descriptionInput.oninput = (e) => {
       this.stepData.description = this.getInputValue(e);
@@ -327,7 +333,7 @@ export class CaptureUI {
   renderStepDataList(data: StepData) {
     if (!data || data.steps.length === 0) return;
     this.sidebarUl.innerHTML = '';
-    this.listTitle.innerText = data.title;
+    this.listTitle.value = data.title;
     data.steps.forEach((step) => {
       this.addListItem(step);
     });
@@ -342,7 +348,7 @@ export class CaptureUI {
     if (this.stepData.steps?.length === 0) {
       this.saveButton.disabled = true;
       this.stepData = {};
-      this.listTitle.innerText = '';
+      this.listTitle.value = '';
       this.pause();
     }
   }
@@ -408,6 +414,7 @@ export class CaptureUI {
       await this.ui.savedStepUI.fetchData();
       console.log(this.stepData);
       this.stepData = {};
+      this.listTitle.value = '';
       this.sidebarUl.innerHTML = '';
       this.saveButton.disabled = true;
       this.resumeButton.disabled = true;

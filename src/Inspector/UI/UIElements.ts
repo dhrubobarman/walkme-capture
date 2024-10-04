@@ -115,10 +115,10 @@ createElement(
 );
 
 export const listTitle = createElement(
-  'h6',
+  'input',
   {
     className:
-      'capture-sidebar-header-title line-clamp-1 text-center text-[var(--inpector-sidebar-header-title-color)] text-[20px] font-semibold mb-3'
+      'capture-sidebar-header-title editableInput line-clamp-1 text-center text-[var(--inpector-sidebar-header-title-color)] text-[20px] font-semibold mb-3'
   },
   cardContent
 );

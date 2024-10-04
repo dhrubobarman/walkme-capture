@@ -7,9 +7,9 @@
     <title>Vite + TS</title>
   </head>
  
-  <body class="dark:bg-slate-950">
-    <div id="app" >
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px; padding-block: 50px;" className="grid w-[100%] grid-cols-[1fr] gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6" id="container"></div>
+  <body class="dark:bg-slate-950 bg-gray-50">
+    <div id="app" class="container mx-auto">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px; padding-block: 50px;" className="grid grid-cols-[1fr] gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6" id="container"></div>
     </div>
     <script type="module" src="/src/main.ts"></script>
     <script>
@@ -21,6 +21,7 @@
         }
         return '';
       }
+      
   
       function renderExsceleton() {
         let html = '';
@@ -28,14 +29,14 @@
           const item = items[i];
           const id = i % 2 === 0 ? i : null;
           const newHTML = `
-            <div ${getId(id, 'card')} class="card dark:bg-slate-800 bg-white rounded-md dark:text-white shadow-xl p-4">
+            <div ${getId(id, 'card')} class="card dark:bg-slate-800 bg-gray-200 rounded-lg dark:text-white shadow-md p-4">
                 <div ${getId(id, 'card-body')} class="card-body">
-                  <h2 ${getId(id, 'card-title')} class="card-title">
+                  <h2 ${getId(id, 'card-title')} class="!text-[20px] font-semibold border-b mb-2 pb-2">
                     ${item}
                   </h2>
-                  <p ${getId(id, 'card-p')}>If a dog chews shoes whose shoes does he choose?</p>
+                  <p ${getId(id, 'card-p')} class="text-md py-2">If a dog chews shoes whose shoes does he choose?</p>
                   <div ${getId(id, 'card-actions')} class="card-actions justify-end">
-                    <button id={item} class="btn btn-primary btn-sm">
+                    <button id={item} class="px-2 py-1 border rounded-md font-semibold bg-[#0f172a] text-white dark:border-gray-800 dark:bg-orange-700">
                       Buy Now
                     </button>
                   </div>
