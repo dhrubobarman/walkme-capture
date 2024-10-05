@@ -108,7 +108,8 @@ export class CaptureUI {
     this.listTitle.oninput = (e) => {
       const value = this.getInputValue(e);
       this.stepData.title = value;
-      this.saveButton.disabled = value.length === 0;
+      const isDisabled = value.length === 0 || !this.stepData.steps || this.stepData.steps.length === 0;
+      this.saveButton.disabled = isDisabled;
     };
   }
 
