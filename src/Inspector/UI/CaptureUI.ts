@@ -314,7 +314,6 @@ export class CaptureUI {
           'btn btn-sm btn-error btn-outline !text-[var(--error)] btn-square border-[var(--inspector-border-color,gray)] hover:border-[var(--inspector-border-color,gray)]',
         innerHTML: deleteIcon,
         title: 'Delete Step',
-        draggable: true,
         onclick: (e) => {
           e.preventDefault();
           e.stopPropagation();

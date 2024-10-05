@@ -77,7 +77,6 @@ export class SavedStepUI {
             'btn btn-sm btn-square btn-error btn-outline !text-[var(--error)] border-[var(--inspector-border-color,gray)] hover:border-[var(--inspector-border-color,gray)]',
           innerHTML: deleteIcon,
           title: 'Delete Flow',
-          draggable: true,
           onclick: (e) => {
             e.preventDefault();
             e.stopPropagation();
