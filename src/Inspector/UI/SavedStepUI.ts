@@ -88,6 +88,7 @@ export class SavedStepUI {
       this.savedSidebarUl.appendChild(sidebarItem);
     });
   }
+
   private async deleteStepData(stepData: StepData) {
     try {
       await this.ui.indexedDb.deleteData(stepData._id);

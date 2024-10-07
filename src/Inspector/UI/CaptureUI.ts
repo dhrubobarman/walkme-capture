@@ -396,6 +396,7 @@ export class CaptureUI {
   private async save() {
     this.clearModal();
     this.closeModal();
+    this.stopCapturing();
     if (!this.ui.indexedDb.isDBReady) {
       alert('Database is not ready yet. Please try again later.');
       return;
