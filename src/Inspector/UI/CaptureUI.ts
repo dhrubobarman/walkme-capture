@@ -23,6 +23,14 @@ import {
 } from '@/Inspector/UI/UIElements';
 import { createElement } from '@/utils/createElement';
 
+const initialStepData: StepData = {
+  _id: '',
+  title: '',
+  learned: false,
+  steps: [],
+  url: ''
+};
+
 export class CaptureUI {
   ui: UI;
   container: HTMLDivElement;
@@ -30,7 +38,7 @@ export class CaptureUI {
   private sidebarDragHandle: HTMLButtonElement = createHandle();
   private modal: HTMLDialogElement;
   private startButton: HTMLButtonElement;
-  stepData: Partial<StepData> = {};
+  stepData: StepData = initialStepData;
   private modalFooterContainer: HTMLDivElement;
   started: boolean = false;
   private modalContentContainer: HTMLDivElement;
@@ -94,7 +102,7 @@ export class CaptureUI {
       this.listTitle.value = '';
       this.resumeButton.disabled = true;
       this.saveButton.disabled = true;
-      this.stepData = {};
+      this.stepData = initialStepData;
       this.sidebarUl.innerHTML = '';
       this.openNameInputDialog();
     };
@@ -180,7 +188,7 @@ export class CaptureUI {
     this.pause();
     let tempStep: Step = {
       title: savedData?.title ?? '',
-      learned: false,
+
       description: savedData?.description ?? '',
       target: selector || '',
       _id: savedData?._id ?? `${Date.now()}`

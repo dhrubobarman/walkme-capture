@@ -12,7 +12,7 @@ export class UI {
   indexedDb: IndexedDb<StepData>;
   constructor(inspector: Inspector) {
     this.inspector = inspector;
-    this.indexedDb = new IndexedDb<StepData>({ storeName: indexDbStoreName, uniqueKey: '_id', dbName: indexDbName, version: 3 });
+    this.indexedDb = new IndexedDb<StepData>({ storeName: indexDbStoreName, uniqueKey: '_id', dbName: indexDbName, version: 4 });
     this.captureUI = new CaptureUI(this, 'captureUI', this.handleZIndex.bind(this));
     this.savedStepUI = new SavedStepUI(this, 'savedStepUI', this.handleZIndex.bind(this));
     this.initDND();
