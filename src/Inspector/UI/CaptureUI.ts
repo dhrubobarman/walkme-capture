@@ -47,7 +47,6 @@ export class CaptureUI {
   private sidebarUl: HTMLUListElement = sidebarUl;
   private resumeButton: HTMLButtonElement = createButton({
     innerText: 'Resume',
-    className: 'btn-success',
     type: 'button'
   });
 
