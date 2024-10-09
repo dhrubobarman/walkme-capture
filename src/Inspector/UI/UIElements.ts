@@ -217,7 +217,7 @@ export const createInput = ({
   );
   return { inputLabel, input };
 };
-export const startButton = createButton({ innerText: 'Start New', container: cardActions });
+export const startButton = createButton({ innerText: 'Start New', container: cardActions, className: 'btn-success' });
 export const saveButton = createButton({ innerText: 'Save', container: cardActions, className: 'mr-auto ' });
 
 export const modal = createElement(
