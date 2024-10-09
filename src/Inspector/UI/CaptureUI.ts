@@ -355,7 +355,7 @@ export class CaptureUI {
     this.stepData.steps?.splice(index, 1);
     if (this.stepData.steps?.length === 0) {
       this.saveButton.disabled = true;
-      this.stepData = {};
+      this.stepData = initialStepData;
       this.listTitle.value = '';
       this.pause();
     }
@@ -422,7 +422,7 @@ export class CaptureUI {
       }
       await this.ui.savedStepUI.fetchData();
       console.log(this.stepData);
-      this.stepData = {};
+      this.stepData = initialStepData;
       this.listTitle.value = '';
       this.sidebarUl.innerHTML = '';
       this.saveButton.disabled = true;
