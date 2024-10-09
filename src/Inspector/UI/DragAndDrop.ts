@@ -48,7 +48,7 @@ export class DragAndDrop {
     }
   };
 
-  private onMouseUp = (e) => {
+  private onMouseUp = () => {
     this.isDragging = false;
     this.removeElevationStyle();
   };
