@@ -71,6 +71,8 @@ export class Inspector {
   }
 
   private handleMouseDown(e: MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
     if (this.isInspecting) {
       e.preventDefault();
       e.stopPropagation();
