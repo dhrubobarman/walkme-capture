@@ -1,6 +1,8 @@
 # WalkMe Capture
 ![image](https://github.com/user-attachments/assets/f11c6291-0fa6-44cc-831d-e7e4c5be5269)
 
+Please follow this [link](https://walkme-capture.dhrubojyotibarman.in) to see a preview of an example project.
+
 WalkMe Capture is a library designed to help create step details for the WalkMe library. It provides an interactive interface to capture and edit steps, which can then be used to guide users through a website.
 
 ## Getting Started
